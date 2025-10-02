@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small helpers */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition;
+}
+.btn-primary {
+  @apply btn bg-brand text-white hover:bg-brand-dark;
+}
+.btn-outline {
+  @apply btn border border-gray-300 hover:bg-gray-50;
+}
+
+.container-max {
+  @apply mx-auto w-full max-w-7xl px-4;
+}
+.card {
+  @apply rounded-2xl bg-white shadow-card;
+}
+.badge {
+  @apply absolute left-2 top-2 rounded-md px-2 py-1 text-xs font-semibold text-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
