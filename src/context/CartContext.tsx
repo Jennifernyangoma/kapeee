@@ -13,6 +13,7 @@ export type CartContextType = {
     addToCart: (item: CartItem) => void;
     removeFromCart: (id: string) => void;
     clearCart: () => void;
+    updateCart: (items: CartItem[]) => void;
     isCartSidebarOpen: boolean;
     openCartSidebar: () => void;
     closeCartSidebar: () => void;
@@ -45,6 +46,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const clearCart = () => setCart([]);
 
+    const updateCart = (items: CartItem[]) => {
+        setCart(items);
+    };
+
     const openCartSidebar = () => setIsCartSidebarOpen(true);
     const closeCartSidebar = () => setIsCartSidebarOpen(false);
 
@@ -55,6 +60,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 addToCart, 
                 removeFromCart, 
                 clearCart,
+                updateCart,
                 isCartSidebarOpen,
                 openCartSidebar,
                 closeCartSidebar

@@ -1,10 +1,30 @@
 import { useCart } from '../hooks/useCart';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiShoppingCart, FiTrash2, FiPlus, FiMinus, FiArrowRight } from 'react-icons/fi';
+import { useEffect } from 'react';
+import { io } from 'socket.io-client';
+import { useAuth } from '../context/AuthContext';
 
 export default function Cart() {
-  const { cart, removeFromCart, clearCart, addToCart } = useCart();
+  const { cart, removeFromCart, clearCart, addToCart, updateCart } = useCart();
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  // Real-time cart updates via Socket.IO
+  useEffect(() => {
+    if (!user) return;
+
+    const socket = io('http://localhost:5000');
+    
+    socket.on('cart:updated', ({ userId, cart: updatedCart }) => {
+      if (userId === user._id) {
+        // Update local cart with server cart data
+        updateCart(updatedCart.items || []);
+      }
+    });
+
+    return () => socket.disconnect();
+  }, [user, updateCart]);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);

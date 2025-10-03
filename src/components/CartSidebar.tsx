@@ -1,6 +1,9 @@
 import { useCart } from '../hooks/useCart';
 import { useNavigate } from 'react-router-dom';
 import { FiX, FiShoppingCart, FiPlus, FiMinus, FiTrash2 } from 'react-icons/fi';
+import { useEffect } from 'react';
+import { io } from 'socket.io-client';
+import { useAuth } from '../context/AuthContext';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -8,9 +11,25 @@ interface CartSidebarProps {
 }
 
 export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
-  const { cart, removeFromCart, addToCart } = useCart();
-  
+  const { cart, removeFromCart, addToCart, updateCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  // Real-time cart updates via Socket.IO
+  useEffect(() => {
+    if (!user) return;
+
+    const socket = io('http://localhost:5000');
+    
+    socket.on('cart:updated', ({ userId, cart: updatedCart }) => {
+      if (userId === user._id) {
+        // Update local cart with server cart data
+        updateCart(updatedCart.items || []);
+      }
+    });
+
+    return () => socket.disconnect();
+  }, [user, updateCart]);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
