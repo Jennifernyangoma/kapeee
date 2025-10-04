@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }: Props) => {
 
         const loggedInUser: User = {
             id: data.user.id,
+            _id: data.user.id, // Add _id property for MongoDB compatibility
             username: data.user.username,
             email: data.user.email,
             role: data.user.role,
@@ -92,6 +93,7 @@ export const AuthProvider = ({ children }: Props) => {
 
         const newUser: User = {
             id: data.user.id,
+            _id: data.user.id, // Add _id property for MongoDB compatibility
             username: data.user.username,
             email: data.user.email,
             role: data.user.role || "user",

@@ -891,7 +891,7 @@ function ProductsTab({ products, setProducts }: { products: Product[], setProduc
 }
 
 // Orders Management Component
-function OrdersTab({ orders, setOrders }: { orders: Order[], setOrders: (orders: Order[]) => void }) {
+function OrdersTab({ orders, setOrders: _setOrders }: { orders: Order[], setOrders: (orders: Order[]) => void }) {
   const [viewOrder, setViewOrder] = useState<Order | null>(null);
 
   const handleStatusChange = async (id: string, status: string) => {
@@ -1316,7 +1316,7 @@ function HeroTab({ heroContent, setHeroContent }: { heroContent: HeroContent[], 
 }
 
 // Icons/Features Management Component  
-function IconsTab({ icons, setIcons }: { icons: Icon[], setIcons: (icons: Icon[]) => void }) {
+function IconsTab({ icons, setIcons: _setIcons }: { icons: Icon[], setIcons: (icons: Icon[]) => void }) {
   const [showForm, setShowForm] = useState(false);
   const [editingIcon, setEditingIcon] = useState<Icon | null>(null);
   const [formData, setFormData] = useState({
@@ -1574,7 +1574,7 @@ function IconsTab({ icons, setIcons }: { icons: Icon[], setIcons: (icons: Icon[]
 }
 
 // Users Management Component
-function UsersTab({ users, setUsers }: { users: User[], setUsers: (users: User[]) => void }) {
+function UsersTab({ users, setUsers: _setUsers }: { users: User[], setUsers: (users: User[]) => void }) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
