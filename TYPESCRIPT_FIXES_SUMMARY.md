@@ -78,18 +78,18 @@ const loggedInUser: User = {
 ### 4. **API Response Type Mismatches**
 **File Fixed:** `api.ts`
 
-**Problem:** API functions had incorrect response type definitions
+**Problem:** API functions had incorrect response type definitions with `ApiResponse<T>` structure
 ```typescript
 // ❌ Before (Error)
 export const register = async (): Promise<{ user: User; token: string }> => {
-  const response = await apiCall<{ data: { user: User; token: string } }>('/auth/register');
-  return response.data!; // Error: missing user, token properties
+  const response = await apiCall<{ user: User; token: string }>('/auth/register');
+  return response; // Error: ApiResponse<T> missing user, token properties
 };
 
 // ✅ After (Fixed)
 export const register = async (): Promise<{ user: User; token: string }> => {
   const response = await apiCall<{ user: User; token: string }>('/auth/register');
-  return response; // Fixed: direct return
+  return response.data!; // Fixed: access data property
 };
 ```
 
@@ -97,14 +97,29 @@ export const register = async (): Promise<{ user: User; token: string }> => {
 ```typescript
 // ❌ Before (Error)
 export const getCart = async () => {
-  const response = await apiCall<{ data: { cart: {...} } }>('/cart');
-  return response.data!.cart; // Error: cart property doesn't exist
+  const response = await apiCall<{ cart: {...} }>('/cart');
+  return response.cart; // Error: cart property doesn't exist on ApiResponse
 };
 
 // ✅ After (Fixed)
 export const getCart = async () => {
   const response = await apiCall<{ cart: {...} }>('/cart');
-  return response.cart; // Fixed: direct access
+  return response.data!.cart; // Fixed: access data.cart
+};
+```
+
+**User API Fixes:**
+```typescript
+// ❌ Before (Error)
+export const getCurrentUser = async (): Promise<User> => {
+  const response = await apiCall<{ user: User }>('/auth/me');
+  return response.user; // Error: user property doesn't exist on ApiResponse
+};
+
+// ✅ After (Fixed)
+export const getCurrentUser = async (): Promise<User> => {
+  const response = await apiCall<{ user: User }>('/auth/me');
+  return response.data!.user; // Fixed: access data.user
 };
 ```
 

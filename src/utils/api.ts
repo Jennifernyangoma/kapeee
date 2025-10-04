@@ -319,12 +319,12 @@ export const register = async (userData: {
     method: 'POST',
     body: JSON.stringify(userData),
   });
-  return response;
+  return response.data!;
 };
 
 export const getCurrentUser = async (): Promise<User> => {
   const response = await apiCall<{ user: User }>('/auth/me');
-  return response.user;
+  return response.data!.user;
 };
 
 // Forgot Password API functions
@@ -382,7 +382,7 @@ export const resetPassword = async (email: string, newPassword: string): Promise
 // Cart API functions
 export const getCart = async (): Promise<{ items: CartItem[]; total: number; itemCount: number }> => {
   const response = await apiCall<{ cart: { items: CartItem[]; total: number; itemCount: number } }>('/cart');
-  return response.cart;
+  return response.data!.cart;
 };
 
 export const addToCart = async (productId: string, quantity: number, variant?: { name: string; value: string }): Promise<void> => {
@@ -394,7 +394,7 @@ export const addToCart = async (productId: string, quantity: number, variant?: {
 
 export const getCartCount = async (): Promise<number> => {
   const response = await apiCall<{ count: number }>('/cart/count');
-  return response.count;
+  return response.data!.count;
 };
 
 // Newsletter API functions
