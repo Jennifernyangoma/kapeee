@@ -35,7 +35,9 @@ export default function Hero() {
       });
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const fetchHeroContent = async () => {

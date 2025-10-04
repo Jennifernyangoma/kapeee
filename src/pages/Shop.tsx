@@ -44,7 +44,9 @@ export default function Shop() {
       setProducts(prev => prev.filter(p => p._id !== id));
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const fetchProducts = async () => {

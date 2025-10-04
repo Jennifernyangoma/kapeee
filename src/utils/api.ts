@@ -264,10 +264,10 @@ export const getFeaturedProducts = async (): Promise<Product[]> => {
 export const getCategories = async (): Promise<Category[]> => {
   // Return mock categories for now since we don't have categories endpoint yet
   return [
-    { _id: '1', name: "Men's Fashion", slug: 'mens-fashion', level: 0, path: [], isActive: true, sortOrder: 1, featured: true, productCount: 0, createdAt: '', updatedAt: '' },
-    { _id: '2', name: "Women's Fashion", slug: 'womens-fashion', level: 0, path: [], isActive: true, sortOrder: 2, featured: true, productCount: 0, createdAt: '', updatedAt: '' },
-    { _id: '3', name: 'Shoes', slug: 'shoes', level: 0, path: [], isActive: true, sortOrder: 3, featured: true, productCount: 0, createdAt: '', updatedAt: '' },
-    { _id: '4', name: 'Accessories', slug: 'accessories', level: 0, path: [], isActive: true, sortOrder: 4, featured: true, productCount: 0, createdAt: '', updatedAt: '' }
+    { _id: '1', name: "Men's Fashion", slug: 'mens-fashion', level: 0, path: [], isActive: true, sortOrder: 1, featured: true, productCount: 0, createdAt: '', updatedAt: '', children: [] },
+    { _id: '2', name: "Women's Fashion", slug: 'womens-fashion', level: 0, path: [], isActive: true, sortOrder: 2, featured: true, productCount: 0, createdAt: '', updatedAt: '', children: [] },
+    { _id: '3', name: 'Shoes', slug: 'shoes', level: 0, path: [], isActive: true, sortOrder: 3, featured: true, productCount: 0, createdAt: '', updatedAt: '', children: [] },
+    { _id: '4', name: 'Accessories', slug: 'accessories', level: 0, path: [], isActive: true, sortOrder: 4, featured: true, productCount: 0, createdAt: '', updatedAt: '', children: [] }
   ];
 };
 

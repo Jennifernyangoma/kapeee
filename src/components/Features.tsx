@@ -46,7 +46,9 @@ export default function Features() {
       setFeatures(prev => prev.filter(f => f._id !== id));
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const fetchFeatures = async () => {

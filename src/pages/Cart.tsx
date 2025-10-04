@@ -23,7 +23,9 @@ export default function Cart() {
       }
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+    };
   }, [user, updateCart]);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);

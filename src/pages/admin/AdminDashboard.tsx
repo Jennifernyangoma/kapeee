@@ -134,7 +134,9 @@ export default function AdminDashboard() {
       setIcons(prev => prev.filter(i => i._id !== id));
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {

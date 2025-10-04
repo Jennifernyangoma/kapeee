@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 export interface User {
   id: string;
+  _id: string; // Add _id property for MongoDB compatibility
   username: string;
   email: string;
   role: string;
